@@ -7,7 +7,7 @@ def load_file(filename:str) -> list[str]:
 
     return data
 
-def part1(input:list[str]) -> tuple[int, int]: 
+def part1(input:list[str]) -> tuple[int, int, int]: 
     #Part 1
     depth = 0
     horizontal_position = 0
@@ -22,12 +22,13 @@ def part1(input:list[str]) -> tuple[int, int]:
 
     print (depth)
     print (horizontal_position)
+    answer = depth*horizontal_position
 
-    print (f'answer: {depth*horizontal_position}')
+    print (f'answer: {answer}')
 
-    return depth, horizontal_position
+    return depth, horizontal_position, answer
 
-def part2(input:list[str]) -> tuple[int, int, int]: 
+def part2(input:list[str]) -> tuple[int, int, int, int]: 
     #Part 1
     aim = 0
     depth = 0
@@ -45,10 +46,11 @@ def part2(input:list[str]) -> tuple[int, int, int]:
     print (aim)
     print (depth)
     print (horizontal_position)
+    answer = depth*horizontal_position
 
-    print (f'answer: {depth*horizontal_position}')
+    print (f'answer: {answer}')
 
-    return aim, depth, horizontal_position
+    return aim, depth, horizontal_position, answer
 
 
 if __name__ == '__main__':

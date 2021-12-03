@@ -46,7 +46,6 @@ if __name__ == '__main__':
     my_file.close()
     data = [int(i) for i in data]
 
-
     #data = depth_test
 
     print("using simple method")
