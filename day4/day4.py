@@ -1,7 +1,7 @@
 import copy
 
 class Bingo_Game:
-    """Represents the board that the game of tic-tac-toe is played on."""
+    """Represents the game of bingo"""
 
     raw_data: list[str]
     number_drawings: list[int]
@@ -44,6 +44,14 @@ class Bingo_Game:
 
         self.boards_matches = [[[False]*5]*5]*self.num_of_boards
 
+    def matches (self) -> None:
+        self.
+        return None
+    
+    def check_for_winner (self) -> int:
+        pass
+        return 0
+
 
 def load_file(filename:str) -> list:
     my_file = open(filename, 'r')
@@ -58,6 +66,11 @@ def part1 (input:dict) -> None:
     part1 = Bingo_Game()
     part1.build_game('day4/sampleset_ex.txt')
     print(part1)
+
+    for i in part1.number_drawings:
+        part1.matches()
+        part1.check_for_winner()
+    
     return None
 
 if __name__ == '__main__':
