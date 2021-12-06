@@ -14,6 +14,8 @@ class data_map():
     raw_data: list[list[str]] #raw data loaded
     start_positions: list[tuple]
     end_positions: list[tuple]
+    diag_start_positions: list[tuple]
+    diag_end_positions: list[tuple]
     max_position : list
     board : list[list]
     directions : list[str]
@@ -51,6 +53,9 @@ class data_map():
 
     def consider_only_straights(self) -> None:
         to_be_removed = []
+        self.diag_start_positions = []
+        self.diag_end_positions = []
+
         for i in range(len(self.start_positions)):
             if self.end_positions[i][0] != self.start_positions[i][0] and self.end_positions[i][1] != self.start_positions[i][1]:
                 to_be_removed += [True]
@@ -60,12 +65,16 @@ class data_map():
         for jdx, j in reversed(list(enumerate(to_be_removed))):
             if j:
                 #print('removing: ' + ''.join(str(self.start_positions[jdx])) + ' and ' + ''.join(str(self.end_positions[jdx])))
+                self.diag_start_positions.append(self.start_positions[jdx])
+                self.diag_end_positions.append(self.end_positions[jdx])
                 self.start_positions.remove(self.start_positions[jdx])
                 self.end_positions.remove(self.end_positions[jdx])
+
         return None
     
     def calc_line_direction(self)->None:
         self.directions = []
+        self.diag_directions = []
 
         for idx, i in enumerate(self.start_positions):
             if self.end_positions[idx][0] < i[0]:
@@ -78,9 +87,32 @@ class data_map():
                 direction = 'up'
 
             self.directions += [direction]
+
+        for idx, i in enumerate(self.diag_start_positions):
+            if self.diag_end_positions[idx][0] < i[0]:
+                if self.diag_end_positions[idx][1] < i[1]:
+                    direction = 'left down'
+                elif self.diag_end_positions[idx][1] > i[1]:
+                    direction = 'left up'
+            elif self.diag_end_positions[idx][0] > i[0]:
+                if self.diag_end_positions[idx][1] < i[1]:
+                    direction = 'right down'
+                elif self.diag_end_positions[idx][1] > i[1]:
+                    direction = 'right up'
+            
+
+            self.diag_directions += [direction]
+        return None
+
+    def load_board(self) -> None:
+        
+        for x in self.spaces:
+            for y in x:
+                self.board[y[0]][y[1]] += 1
+    
         return None
     
-    def load_board(self) -> None:
+    def load_spaces_straights(self) -> None:
         self.spaces = []
         position = [0,0]
 
@@ -101,11 +133,35 @@ class data_map():
                     position[1] = position[1]-1
 
                 self.spaces[i].append(position[:])
-
-        for x in self.spaces:
-            for y in x:
-                self.board[y[0]][y[1]] += 1
     
+        return None
+    
+    def load_spaces_diags(self) -> None:
+
+        current_list_length = len(self.spaces) 
+        extension = [[] for line in range(len(self.diag_start_positions))]
+        self.spaces += extension
+
+        for i in range(len(self.diag_start_positions)):
+            position = list(self.diag_start_positions[i])
+            self.spaces[i] += [list(self.diag_start_positions[i])]
+
+            while position != list(self.diag_end_positions[i]):
+                if self.diag_directions[i] == 'left up':
+                    position[0] = position[0]-1
+                    position[1] = position[1]+1
+                if self.diag_directions[i] == 'right up':
+                    position[0] = position[0]+1
+                    position[1] = position[1]+1
+                if self.diag_directions[i] == 'left down':
+                    position[0] = position[0]-1
+                    position[1] = position[1]-1
+                if self.diag_directions[i] == 'right down':
+                    position[0] = position[0]+1
+                    position[1] = position[1]-1
+
+                self.spaces[i+current_list_length].append(position[:])
+
         return None
 
     def find_largest(self) -> tuple:
@@ -122,23 +178,34 @@ class data_map():
 
         return (max_val, occurrence)
 
-def part1(filename:str) -> None:
+def part1(filename:str) -> object:
     part1 = data_map()
     part1.build(filename)
     part1.consider_only_straights()
     part1.calc_line_direction()
+    part1.load_spaces_straights()
     part1.load_board()
     (val, occurrence) = part1.find_largest()
 
     print(f'Answer : {val} {occurrence}')
-    return None
+    return part1
 
-def part2() -> None:
+def part2(filename:str) -> None:
+    part2 = data_map()
+    part2.build(filename)
+    part2.consider_only_straights()
+    part2.calc_line_direction()
+    part2.load_spaces_straights()
+    part2.load_spaces_diags()
+    part2.load_board()
 
+    (val, occurrence) = part2.find_largest()
+
+    print(f'Answer : {val} {occurrence}')
     return None
 
 if __name__ == '__main__':
     print("---------- Part 1 ----------")
     part1('day5/sampleset.txt')
     print("---------- Part 2 ----------")
-    #part2('day5/sampleset.txt')
+    part2('day5/sampleset.txt')
