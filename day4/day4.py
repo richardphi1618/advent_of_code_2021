@@ -163,6 +163,7 @@ def part2(filename:str) -> None:
 if __name__ == '__main__':
     print("---------- Part 1 ----------")
     part1('day4/sampleset.txt')
+    #sampleset.txt answer is 51776
     print("---------- Part 2 ----------")
     part2('day4/sampleset.txt')
     

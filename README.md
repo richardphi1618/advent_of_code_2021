@@ -20,7 +20,7 @@ part 1 answer: 51776
 part 2 answer: 
 
 ## Day 5
-part 1 answer: 
+part 1 answer: 5576
 part 2 answer: 
 
 ## Day 6

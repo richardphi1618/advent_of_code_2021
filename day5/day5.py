@@ -117,7 +117,8 @@ class data_map():
                 max_val = max(i[1:])
         
         for j in self.board:
-            occurrence += j.count(max_val)
+            for k in range(2, max_val+1):
+                occurrence += j.count(k)
 
         return (max_val, occurrence)
 
@@ -138,6 +139,6 @@ def part2() -> None:
 
 if __name__ == '__main__':
     print("---------- Part 1 ----------")
-    part1('day5/sampleset_ex.txt')
+    part1('day5/sampleset.txt')
     print("---------- Part 2 ----------")
     #part2('day5/sampleset.txt')
