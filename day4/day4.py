@@ -61,7 +61,7 @@ class Bingo_Game:
                         self.boards_matches[board_dx][row_dx][column_dx] = True        
         return None
     
-    def check_for_winner (self, verbose = True) -> None:
+    def check_for_winner (self) -> None:
         self.turn += 1
 
         #check rows
@@ -117,6 +117,7 @@ def part1 (filename:str) -> None:
         if part1.game_over: break
 
     print(f"Game Over!!! \nTurn Num. {part1.turn}")
+    print(f"winning drawing: {part1.number_drawings[part1.turn-1]}")
     print(f"Winning board is:{part1.winning_board} \nWinning row: {part1.winning_row}")
 
     unmatached_sum = sum_unmatched(part1.boards_int[part1.winning_board-1], part1.boards_matches[part1.winning_board-1])
@@ -124,7 +125,7 @@ def part1 (filename:str) -> None:
     print(f"\nunmatched sum: {unmatached_sum}")
     print(f"winning drawing: {part1.number_drawings[part1.turn-1]}")
 
-    print(f"\nanswer: {unmatached_sum*part1.number_drawings[part1.turn-1]}")
+    print(f"\nanswer: {unmatached_sum*part1.number_drawings[part1.turn-1]}\n")
     return None
 
 def part2(filename:str) -> None:
@@ -138,8 +139,8 @@ def part2(filename:str) -> None:
         part2.find_matches(i)
         part2.check_for_winner()
         if part2.game_over and len(part2.boards_int) != 1:
-            winning_boards_matches += copy.deepcopy([part2.boards_matches[part2.winning_board-1]])
-            winning_boards += copy.deepcopy([part2.boards_int[part2.winning_board-1]])
+            winning_boards_matches += [part2.boards_matches[part2.winning_board-1]]
+            winning_boards += [part2.boards_int[part2.winning_board-1]]
             part2.boards_matches.remove(part2.boards_matches[part2.winning_board-1])
             part2.boards_int.remove(part2.boards_int[part2.winning_board-1])
             part2.game_over = False
@@ -155,8 +156,7 @@ def part2(filename:str) -> None:
 
     print(f"\nunmatched sum: {unmatached_sum}")
     print(f"winning drawing: {part2.number_drawings[part2.turn-1]}")
-
-    print(f"\nanswer: {unmatached_sum*part2.number_drawings[part2.turn-1]}")
+    print(f"\nanswer: {unmatached_sum*part2.number_drawings[part2.turn-1]}\n")
 
     return None
 
