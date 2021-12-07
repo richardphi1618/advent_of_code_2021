@@ -30,6 +30,7 @@ def fuel_used_2(new_pos: int, positions: list[int]) -> int:
 
     return val
 
+
 def load_file(filename:str) -> list:
     my_file = open(filename, 'r')
     content = my_file.read()
@@ -43,9 +44,9 @@ def load_file(filename:str) -> list:
 
 def part1(filename:str) -> object:
     data = load_file(filename)
-    start_pos = sum(data) / len(data)
     min_pos = min(data)
     max_pos = max(data)
+    start_pos = (min_pos + max_pos) / 2
     min_fuel = min_fuel_used(data, min_pos, max_pos, int(start_pos), fuel_used_1)
 
     print(min_fuel)
@@ -53,9 +54,9 @@ def part1(filename:str) -> object:
 
 def part2(filename:str) -> None:
     data = load_file(filename)
-    start_pos = sum(data) / len(data)
     min_pos = min(data)
     max_pos = max(data)
+    start_pos = (min_pos + max_pos) / 2
     min_fuel = min_fuel_used(data, min_pos, max_pos, int(start_pos), fuel_used_2)
 
     print(min_fuel)
@@ -63,6 +64,6 @@ def part2(filename:str) -> None:
 
 if __name__ == '__main__':
     print("---------- Part 1 ----------")
-    part1('day7/sampleset_ex.txt')
+    part1('day7/sampleset.txt')
     print("---------- Part 2 ----------")
-    part2('day6/sampleset_ex.txt')
+    part2('day7/sampleset.txt')
