@@ -28,7 +28,7 @@ part 1 answer: 352151 \
 part 2 answer: 1601616884019
 
 ## Day 7
-part 1 answer:  \
+part 1 answer:343605  \
 part 2 answer: 
 
 ## Day 8
