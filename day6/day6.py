@@ -26,7 +26,7 @@ def simulation(input: list[int], number_of_days: int) -> list[int]:
                 output[idx] -= 1
         
         #print (f'After  {day_num} day:  {output}')
-        print(f'Day: {day_num}')
+        #print(f'Day: {day_num}')
     
     print (f'Answer: {len(output)}')
     return output
@@ -50,7 +50,7 @@ def simulation_fast(input: list[int], number_of_days: int) -> list[int]:
         output[8] = temp
         
         #print (f'After  {day_num} day:  {output}')
-        print(f'Day: {day_num}')
+        #print(f'Day: {day_num}')
     
     answer = 0
     for i in output:
@@ -61,7 +61,7 @@ def simulation_fast(input: list[int], number_of_days: int) -> list[int]:
 
 def part1(filename:str) -> object:
     initial_values = copy.deepcopy(load_file(filename))
-    number_of_days = 18
+    number_of_days = 80
     simulation(initial_values, number_of_days)
 
     return part1
@@ -74,6 +74,6 @@ def part2(filename:str) -> None:
 
 if __name__ == '__main__':
     print("---------- Part 1 ----------")
-    #part1('day6/sampleset.txt')
+    part1('day6/sampleset.txt')
     print("---------- Part 2 ----------")
     part2('day6/sampleset.txt')
