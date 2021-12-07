@@ -24,7 +24,7 @@ part 1 answer: 5576 \
 part 2 answer: 18144
 
 ## Day 6
-part 1 answer: \
+part 1 answer: 352151 \
 part 2 answer: 
 
 ## Day 7

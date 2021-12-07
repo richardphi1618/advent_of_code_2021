@@ -1,6 +1,3 @@
-from types import MappingProxyType
-
-
 def load_file(filename:str) -> list:
     my_file = open(filename, 'r')
     content = my_file.read()
