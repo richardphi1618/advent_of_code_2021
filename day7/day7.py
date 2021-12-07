@@ -15,15 +15,20 @@ def min_fuel_used(positions :list [int], min_pos: int, max_pos: int, start_pos: 
 
 
 def fuel_used_1(new_pos: int, positions: list[int]) -> int:
-	return sum((abs(new_pos - i) for i in positions))
+    val = 0
+    for i in positions:
+       val += abs(new_pos - i)
+    
+    return val
 
 def fuel_used_2(new_pos: int, positions: list[int]) -> int:
-    cost_per = []
+    val = 0
     for i in positions:
-        distance = abs(new_pos - i)
-        cost_per += [distance * (distance + 1) // 2]
+        #https://math.stackexchange.com/questions/593318/factorial-but-with-addition/593323
+        n = abs(new_pos - i)
+        val += (n * (n + 1)) // 2
 
-    return sum(cost_per)
+    return val
 
 def load_file(filename:str) -> list:
     my_file = open(filename, 'r')
@@ -38,10 +43,9 @@ def load_file(filename:str) -> list:
 
 def part1(filename:str) -> object:
     data = load_file(filename)
-    data_average = sum(data) / len(data)
+    start_pos = sum(data) / len(data)
     min_pos = min(data)
     max_pos = max(data)
-    start_pos = data_average
     min_fuel = min_fuel_used(data, min_pos, max_pos, int(start_pos), fuel_used_1)
 
     print(min_fuel)
@@ -49,10 +53,9 @@ def part1(filename:str) -> object:
 
 def part2(filename:str) -> None:
     data = load_file(filename)
-    data_average = sum(data) / len(data)
+    start_pos = sum(data) / len(data)
     min_pos = min(data)
     max_pos = max(data)
-    start_pos = data_average
     min_fuel = min_fuel_used(data, min_pos, max_pos, int(start_pos), fuel_used_2)
 
     print(min_fuel)
@@ -60,6 +63,6 @@ def part2(filename:str) -> None:
 
 if __name__ == '__main__':
     print("---------- Part 1 ----------")
-    part1('day7/sampleset.txt')
+    part1('day7/sampleset_ex.txt')
     print("---------- Part 2 ----------")
-    part2('day6/sampleset.txt')
+    part2('day6/sampleset_ex.txt')
