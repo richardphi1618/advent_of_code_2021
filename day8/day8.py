@@ -22,7 +22,6 @@ def part1(filename:str) -> object:
 
 def part2(filename:str) -> None:
     data = load_file(filename)
-
     print(data)
     return None
 

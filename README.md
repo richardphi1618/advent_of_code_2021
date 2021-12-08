@@ -29,12 +29,12 @@ part 2 answer: 1601616884019
 
 ## Day 7
 tapped on this one a bit. I looked up on reddit and people were saying to use binary search. Found a right up here: \
-<https://www.geeksforgeeks.org/binary-search/>
+<https://www.geeksforgeeks.org/binary-search/> \
 part 1 answer:343605  \
 part 2 answer: 
 
 ## Day 8
-part 1 answer:  \
+part 1 answer:456  \
 part 2 answer: 
 
 ## Day 9
